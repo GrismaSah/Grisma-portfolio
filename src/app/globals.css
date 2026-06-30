@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────────────────────────────────────────────────────────
+   THEME TOKENS — dark is the default. `.light` on <html> flips
+   the palette (the theme toggle adds/removes that class).
+   👉 Change brand colors here.
+   ─────────────────────────────────────────────────────────── */
+:root {
+  --bg: #09090b;
+  --card: #111111;
+  --line: rgba(255, 255, 255, 0.08);
+  --text: #f5f5f5;
+  --muted: #a1a1aa;
+  --glass: rgba(255, 255, 255, 0.04);
+  --accent: #7c5cff;
+  --accent-hover: #9d7dff;
+  --blue: #4f9dff;
+  --grad: linear-gradient(120deg, #7c5cff, #4f9dff);
+}
+
+.light {
+  --bg: #f6f6f8;
+  --card: #ffffff;
+  --line: rgba(0, 0, 0, 0.08);
+  --text: #0f0f12;
+  --muted: #52525b;
+  --glass: rgba(0, 0, 0, 0.03);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7c5cff, #4f9dff);
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.4);
+  color: #fff;
+}
+
+/* ── Reusable components ── */
+@layer components {
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px;
+  }
+
+  .surface {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+  }
+
+  .text-grad {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .text-grad-anim {
+    background: linear-gradient(120deg, #7c5cff, #4f9dff, #7c5cff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  /* gradient hover border */
+  .grad-border {
+    position: relative;
+  }
+  .grad-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--grad);
+    -webkit-mask: linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .grad-border:hover::before {
+    opacity: 1;
+  }
+
+  .section-pad {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* dotted grid w/ radial mask (hero) */
+.dotted-grid {
+  background-image: radial-gradient(
+    rgba(124, 92, 255, 0.18) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    #000 35%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 35%, transparent 75%);
+}
+
+/* react-github-calendar: nudge text color to theme */
+.react-activity-calendar text {
+  fill: var(--muted) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
