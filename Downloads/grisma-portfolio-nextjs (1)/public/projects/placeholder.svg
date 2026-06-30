@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#4f9dff"/></linearGradient></defs>
+  <rect width="800" height="450" fill="#0d0d11"/>
+  <rect width="800" height="450" fill="url(#g)" opacity="0.18"/>
+  <circle cx="650" cy="90" r="120" fill="url(#g)" opacity="0.25"/>
+  <circle cx="120" cy="380" r="90" fill="url(#g)" opacity="0.2"/>
+  <text x="48" y="238" font-family="sans-serif" font-size="46" font-weight="700" fill="#f5f5f5">Coming Soon</text>
+  <text x="48" y="282" font-family="sans-serif" font-size="18" fill="#9b9ba3">Replace with a real screenshot</text>
+</svg>
